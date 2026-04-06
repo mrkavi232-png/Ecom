@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - LUMINARY</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">LUMINARY</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container" style="display: flex; justify-content: center; padding-top: 4rem;">
+        <div class="auth-card" style="max-width: 600px;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">My Profile</h2>
+            <form id="profile-form">
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Email</label>
+                    <input type="email" id="profile-email" disabled
+                        style="background-color: #f1f5f9; cursor: not-allowed;">
+                </div>
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label for="profile-name" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Full
+                        Name</label>
+                    <input type="text" id="profile-name">
+                </div>
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label for="profile-phone" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Phone
+                        Number</label>
+                    <input type="tel" id="profile-phone">
+                </div>
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label for="profile-address"
+                        style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Shipping Address</label>
+                    <textarea id="profile-address" rows="3"
+                        style="width: 100%; padding: 0.8rem; border: 1px solid #e2e8f0; border-radius: 6px; font-family: inherit; background: var(--color-white); color: inherit;"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Save Changes</button>
+            </form>
+            <div style="margin-top: 2rem; border-top: 1px solid #e2e8f0; padding-top: 1rem; text-align: center;">
+                <button id="logout-btn-profile" class="btn btn-secondary"
+                    style="background: transparent; border: 1px solid #ef4444; color: #ef4444;">Log Out</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

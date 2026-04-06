@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - LUMINARY</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">LUMINARY</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container" style="display: flex; justify-content: center; align-items: center; min-height: 80vh;">
+        <div class="auth-card">
+            <h2 style="text-align: center; margin-bottom: 1rem; font-size: 1.8rem;">Admin Login</h2>
+            <p style="text-align: center; margin-bottom: 2rem; color: var(--color-text-muted);">
+                🔐 Authorized Personnel Only
+            </p>
+            <form id="admin-login-form">
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Email</label>
+                    <input type="email" id="email" required placeholder="admin@luminary.com">
+                </div>
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label for="password"
+                        style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Password</label>
+                    <input type="password" id="password" required placeholder="Enter admin password">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Login as
+                    Admin</button>
+            </form>
+            <p style="text-align: center; margin-top: 1.5rem; color: var(--color-text-muted); font-size: 0.9rem;">
+                Default credentials: admin@luminary.com / admin123
+            </p>
+            <p style="text-align: center; margin-top: 1rem; color: var(--color-text-muted);">
+                <a href="login.html" style="color: var(--color-electric-blue); font-weight: 600;">← Back to User
+                    Login</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:3000/api';
+        const AUTH_TOKEN_KEY = 'auth_token';
+
+        document.getElementById('admin-login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch(`${API_URL}/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (data.message === 'success') {
+                    // Check if user is admin
+                    if (data.user.is_admin === 1 || data.user.is_admin === true) {
+                        localStorage.setItem(AUTH_TOKEN_KEY, data.token);
+                        localStorage.setItem('user', JSON.stringify(data.user));
+                        alert('Admin login successful!');
+                        window.location.href = 'admin.html';
+                    } else {
+                        alert('Access denied. This account does not have admin privileges.');
+                    }
+                } else {
+                    alert('Login failed: ' + (data.error || 'Unknown error'));
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                alert('Login failed. Please try again.');
+            }
+        });
+    </script>
+</body>
+
+</html>
